@@ -43,6 +43,22 @@ async function getGames() {
     }
 }
 
+async function deleteGame(gameId) {
+    try{
+        const response = await fetch(`&{API_URL}/${gameId}`, {
+            method: 'DELETE',
+        });
+        if (response.ok) {
+            console.log("Game deleted");
+            getGames();
+        } else {
+            console.error('Error in deleting');
+        }
+    } catch (error){
+        console.error('Network error: ' + error.message);
+    }
+}
+
 document.getElementById('gameForm').addEventListener('submit', function (event) {
     event.preventDefault();
 
