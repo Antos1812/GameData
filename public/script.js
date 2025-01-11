@@ -35,7 +35,8 @@ async function getGames() {
             gameElement.innerHTML = `<h3>${game.name}</h3>
                 <p><strong>Czas gry:</strong> ${game.playtime} minut</p>
                 <p><strong>Liczba graczy:</strong> ${game.playersnumber}</p>
-                <p><strong>Opis:</strong> ${game.description}</p>`;
+                <p><strong>Opis:</strong> ${game.description}</p>
+                <button onclick="deleteGame(${game.id})">Delete</button>`;
                 gamesListDiv.appendChild(gameElement);
         });
     } catch (error){
@@ -45,7 +46,7 @@ async function getGames() {
 
 async function deleteGame(gameId) {
     try{
-        const response = await fetch(`&{API_URL}/${gameId}`, {
+        const response = await fetch(`${API_URL}/${gameId}`, {
             method: 'DELETE',
         });
         if (response.ok) {
