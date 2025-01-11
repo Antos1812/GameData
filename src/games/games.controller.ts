@@ -9,29 +9,32 @@ export class GamesController {
     constructor(private readonly gamesService: GamesService) {}
     
     @Post()
-    create(@Body() createGamesDto: CreateGamesDto){
-        return{
+    async create(@Body() createGamesDto: CreateGamesDto): Promise<{ message: string, data: Games }> {
+        const game = await this.gamesService.create(createGamesDto);
+        return {
             message: 'Game is created',
-            data: createGamesDto,
+            data: game,
         };
     }
 
     @Get()
-    findAll(): Promise<Games[]> {
+    async findAll(): Promise<Games[]> {
         return this.gamesService.findAll();
     }
+
     @Get(':id')
-    findOne(@Param('id') id: string): Promise<Games>{
+    async findOne(@Param('id') id: string): Promise<Games> {
         return this.gamesService.findOne(+id);
     }
 
     @Patch(':id')
-    update(@Param('id')id: string, @Body() games: Games): Promise<Games>{
-        return this.gamesService.update(Number(id), games);
+    async update(@Param('id') id: string, @Body() updateGamesDto: UpdateGamesDto): Promise<Games> {
+        return this.gamesService.update(Number(id), updateGamesDto);
     }
 
     @Delete(':id')
-    remove(@Param('id')id: string): Promise<void>{
-        return this.gamesService.remove(Number(id));
+    async remove(@Param('id') id: string): Promise<{ message: string }> {
+        await this.gamesService.remove(Number(id));
+        return { message: 'Game successfully removed' };
     }
 }
