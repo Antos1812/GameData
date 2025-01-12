@@ -1,15 +1,20 @@
-import { IsString, IsInt, Min, Max, IsOptional } from 'class-validator';
+import { IsString, IsNotEmpty, IsNumber } from 'class-validator';
 
 export class CreateGamesDto {
+  @IsNotEmpty()
   @IsString()
-  title: string;
+  name: string;
 
-  @IsInt()
-  @Min(0)
-  @Max(100)
-  rating: number;
+  @IsNotEmpty()
+  @IsNumber()
+  playtime: number;
 
-  @IsOptional()
+  @IsNotEmpty()
+  @IsNumber()
+  playersnumber: number;
+
+  @IsNotEmpty()
   @IsString()
-  description?: string;
+  description: string;
+  
 }
