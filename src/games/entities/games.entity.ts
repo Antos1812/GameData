@@ -5,12 +5,15 @@ export class Games {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column()
+    @Column({ nullable: false})
     name: string;
-    @Column()
+
+    @Column({nullable: false})
     playtime: number;
-    @Column()
+
+    @Column({nullable: false})
     playersnumber: number;
-    @Column()
+
+    @Column({nullable: false})
     description: string;
 }
