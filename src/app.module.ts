@@ -4,6 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Games } from './games/entities/games.entity';
 import { GamesModule } from './games/games.module';
 import { AppService } from './app.service';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { AppService } from './app.service';
       synchronize: true,
     }),
     GamesModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
