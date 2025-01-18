@@ -1,84 +1,30 @@
-
 const API_URL = 'http://localhost:3000/games';
 
-const preCredentials = {
-    email: 'test@example.com',
-    password: '1234',
-};
-
-async function loginUser(credentials) {
+async function addGame(gameData) {
     try {
         const response = await fetch(API_URL, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(credentials),
-        });
-        
-        const result = await response.json();
-        
-        if (credentials.email === preCredentials.email && credentials.password === preCredentials.password) {  // for later,  response.ok && result.access_token
-
-            localStorage.setItem('jwt_token', result.access_token); 
-            alert("Logged in successfully!");
-            document.getElementById('loginForm').style.display = 'none';
-            document.getElementById('gameForm').style.display = 'block';
-            window.location.href = "dashboard.html";
-
-        } else {
-            document.getElementById('loginError').style.display = 'block'; 
-        }
-    } catch (error) {
-        console.error('Error:', error);
-        document.getElementById('loginError').style.display = 'block';
-    }
-}
-
-document.getElementById('loginForm').addEventListener('submit', function (event) {
-    event.preventDefault();
-
-    const credentials = {
-        email: document.getElementById('email').value,
-        password: document.getElementById('password').value,
-    };
-
-    loginUser(credentials);
-});
-
-async function addGame(gameData){
-    try {
-        const token = localStorage.getItem('jwt_token');
-        const response = await fetch(API_URL, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`,
             },
             body: JSON.stringify(gameData),
         });
         const result = await response.json();
-        if (response.ok){
-            console.log("Games added");
+        if (response.ok) {
+            console.log("Game added");
             getGames();
             document.getElementById('gameForm').reset();
         } else {
-            console.error('Error: Games added incorrect' + result.message);
+            console.error('Error: Game not added - ' + result.message);
         }
-    } catch (error){
+    } catch (error) {
         console.error('Network error: ' + error.message);
     }
 }
 
 async function getGames() {
-    const token = localStorage.getItem('jwt_token');
-
     try {
-        const response = await fetch(API_URL, {
-            headers: {
-                'Authorization': `Bearer ${token}`,
-            },
-        });
+        const response = await fetch(API_URL);
         const games = await response.json();
         const gamesListDiv = document.getElementById('gamesList');
         gamesListDiv.innerHTML = '';
@@ -90,22 +36,17 @@ async function getGames() {
                 <p><strong>Liczba graczy:</strong> ${game.playersnumber}</p>
                 <p><strong>Opis:</strong> ${game.description}</p>
                 <button onclick="deleteGame(${game.id})">Delete</button>`;
-                gamesListDiv.appendChild(gameElement);
+            gamesListDiv.appendChild(gameElement);
         });
-    } catch (error){
+    } catch (error) {
         console.error('Network error: ' + error.message);
     }
 }
 
 async function deleteGame(gameId) {
-    const token = localStorage.getItem('jwt_token');
-
-    try{
+    try {
         const response = await fetch(`${API_URL}/${gameId}`, {
             method: 'DELETE',
-            headers: {
-                'Authorization': `Bearer ${token}`,
-            },
         });
         if (response.ok) {
             console.log("Game deleted");
@@ -113,7 +54,7 @@ async function deleteGame(gameId) {
         } else {
             console.error('Error in deleting game');
         }
-    } catch (error){
+    } catch (error) {
         console.error('Network error: ' + error.message);
     }
 }
@@ -130,14 +71,15 @@ document.getElementById('gameForm').addEventListener('submit', function (event) 
     addGame(newGame);
 });
 
-window.onload = function() {
-    if(localStorage.getItem('jwt_token')){
-        document.getElementById('gameForm').style.display = 'block';
-        document.getElementById('loginForm').style.display = 'none';
-        getGames();
-    } else {
-        document.getElementById('gameForm').style.display = 'none';
-    }
+window.onload = function () {
+    document.getElementById('gameForm').style.display = 'block';
+
+    
+    getGames();
 };
+
+
+
+
 
 getGames();

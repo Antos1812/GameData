@@ -53,16 +53,16 @@ button {
     width: 100%;
     padding: 10px;
     font-size: 16px;
-    background-color: #5cb85c;
+    background-color: #76da76;
     color: #fff;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.6s;
 }
 
 button:hover {
-    background-color: #4cae4c;
+    background-color: #408d40;
 }
 
 #gamesList {
@@ -83,7 +83,7 @@ button:hover {
 
 #gamesList h3 {
     margin-top: 0;
-    font-size: 18px;
+    font-size: 23px;
     color: #007bff;
 }
 

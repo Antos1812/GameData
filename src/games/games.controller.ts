@@ -1,5 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
-import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { Controller, Get, Post, Body, Patch, Param, Delete} from '@nestjs/common';
 import { GamesService } from './games.service';
 import { Games } from './entities/games.entity';
 import { CreateGamesDto } from 'src/dto/create-games.dto';
@@ -17,8 +16,6 @@ export class GamesController {
             data: game,
         };
     }
-
-    @UseGuards(JwtAuthGuard)
     @Get()
     async findAll(): Promise<Games[]> {
         return this.gamesService.findAll();
