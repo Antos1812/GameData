@@ -31,7 +31,8 @@ async function getGames() {
 
         games.forEach(game => {
             const gameElement = document.createElement('div');
-            gameElement.innerHTML = `<h3>${game.name}</h3>
+            gameElement.innerHTML = 
+                `<h3>${game.name}</h3>
                 <p><strong>Czas gry:</strong> ${game.playtime} minut</p>
                 <p><strong>Liczba graczy:</strong> ${game.playersnumber}</p>
                 <p><strong>Opis:</strong> ${game.description}</p>
@@ -74,9 +75,26 @@ document.getElementById('gameForm').addEventListener('submit', function (event) 
 window.onload = function () {
     document.getElementById('gameForm').style.display = 'block';
 
-    
+
     getGames();
 };
+
+function Setdarktheme(){
+
+        const body = document.body;
+        body.style.backgroundImage = 'linear-gradient(rgb(62, 58, 80),rgb(62, 58, 80))';
+        body.style.color = 'white';
+
+        const form = document.getElementById("gameForm");
+        form.style.backgroundImage = 'linear-gradient(rgb(79, 77, 88),rgb(79, 77, 88))'
+
+        const para = document.querySelectorAll('p');
+        para.forEach(p => p.style.color = 'white');
+
+        const h = document.querySelectorAll('h1,h2');
+        h.forEach(p => p.style.color = 'white');
+}; 
+
 
 
 
