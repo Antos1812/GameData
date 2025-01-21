@@ -83,10 +83,13 @@ function Setdarktheme(){
 
         const body = document.body;
         body.style.backgroundImage = 'linear-gradient(rgb(62, 58, 80),rgb(62, 58, 80))';
-        body.style.color = 'white';
+        body.style.color = 'grey';
 
         const form = document.getElementById("gameForm");
-        form.style.backgroundImage = 'linear-gradient(rgb(79, 77, 88),rgb(79, 77, 88))'
+        form.style.backgroundImage = 'linear-gradient(rgb(79, 77, 88),rgb(79, 77, 88))';
+ 
+        const Glist = document.getElementById(".gamesList");
+        Glist.style.backgroundColor = 'rgb(79, 77, 88)';
 
         const para = document.querySelectorAll('p');
         para.forEach(p => p.style.color = 'white');
