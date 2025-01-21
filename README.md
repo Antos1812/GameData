@@ -1,6 +1,8 @@
 # Board Game Library
 
 A simple web application for managing a board game library. It allows adding, displaying, and deleting games.
+![image](https://github.com/user-attachments/assets/49df8852-0c7c-4581-a47e-bb0ae7c24f95)
+
 
 ## Features
 
