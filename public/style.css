@@ -72,10 +72,12 @@ button:hover {
     width: 90%;
     max-width: 1200px;
     margin: 20px auto;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0);
 }
 
 #gamesList div {
-    background: #fff;
+    background-color: #ebe3d2;
     padding: 15px;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
